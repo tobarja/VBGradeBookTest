@@ -4,11 +4,11 @@
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ReDim StudentRecords(nudStudentCount.Value)
-        Header = StudentRecord.getHeader(nudStudentCount.Value)
+        Header = StudentRecord.getHeader(nudNumberOfGrades.Value)
         Me.flpHeader.Controls.Add(Header)
         Me.flpWorkSheet.SuspendLayout()
         For x = 0 To nudStudentCount.Value - 1
-            StudentRecords(x) = New StudentRecord(nudStudentCount.Value)
+            StudentRecords(x) = New StudentRecord(nudNumberOfGrades.Value)
             Me.flpWorkSheet.Controls.Add(StudentRecords(x).Row)
         Next
         Me.flpWorkSheet.ResumeLayout()
@@ -36,6 +36,10 @@
             ReDim Preserve StudentRecords(newCount)
         End If
         Me.flpWorkSheet.ResumeLayout()
+
+    End Sub
+
+    Private Sub nudNumberOfGrades_ValueChanged(sender As Object, e As EventArgs) Handles nudNumberOfGrades.ValueChanged
 
     End Sub
 End Class

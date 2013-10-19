@@ -26,7 +26,10 @@ Partial Class Form1
         Me.Label1 = New System.Windows.Forms.Label()
         Me.flpWorkSheet = New System.Windows.Forms.FlowLayoutPanel()
         Me.flpHeader = New System.Windows.Forms.FlowLayoutPanel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.nudNumberOfGrades = New System.Windows.Forms.NumericUpDown()
         CType(Me.nudStudentCount, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudNumberOfGrades, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'nudStudentCount
@@ -63,11 +66,31 @@ Partial Class Form1
         Me.flpHeader.Size = New System.Drawing.Size(700, 30)
         Me.flpHeader.TabIndex = 3
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(230, 17)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(96, 13)
+        Me.Label2.TabIndex = 5
+        Me.Label2.Text = "Number of Grades:"
+        '
+        'nudNumberOfGrades
+        '
+        Me.nudNumberOfGrades.Location = New System.Drawing.Point(332, 15)
+        Me.nudNumberOfGrades.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudNumberOfGrades.Name = "nudNumberOfGrades"
+        Me.nudNumberOfGrades.Size = New System.Drawing.Size(63, 20)
+        Me.nudNumberOfGrades.TabIndex = 4
+        Me.nudNumberOfGrades.Value = New Decimal(New Integer() {5, 0, 0, 0})
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(760, 386)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.nudNumberOfGrades)
         Me.Controls.Add(Me.flpHeader)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.nudStudentCount)
@@ -75,6 +98,7 @@ Partial Class Form1
         Me.Name = "Form1"
         Me.Text = "GradeBook"
         CType(Me.nudStudentCount, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudNumberOfGrades, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -83,5 +107,7 @@ Partial Class Form1
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents flpWorkSheet As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents flpHeader As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents nudNumberOfGrades As System.Windows.Forms.NumericUpDown
 
 End Class
