@@ -22,17 +22,56 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.nudStudentCount = New System.Windows.Forms.NumericUpDown()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.flpWorkSheet = New System.Windows.Forms.FlowLayoutPanel()
+        CType(Me.nudStudentCount, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'nudStudentCount
+        '
+        Me.nudStudentCount.Location = New System.Drawing.Point(147, 17)
+        Me.nudStudentCount.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudStudentCount.Name = "nudStudentCount"
+        Me.nudStudentCount.Size = New System.Drawing.Size(63, 20)
+        Me.nudStudentCount.TabIndex = 1
+        Me.nudStudentCount.Value = New Decimal(New Integer() {5, 0, 0, 0})
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(37, 19)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(104, 13)
+        Me.Label1.TabIndex = 2
+        Me.Label1.Text = "Number of Students:"
+        '
+        'flpWorkSheet
+        '
+        Me.flpWorkSheet.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
+        Me.flpWorkSheet.Location = New System.Drawing.Point(29, 57)
+        Me.flpWorkSheet.Name = "flpWorkSheet"
+        Me.flpWorkSheet.Size = New System.Drawing.Size(700, 150)
+        Me.flpWorkSheet.TabIndex = 0
+        Me.flpWorkSheet.WrapContents = False
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(768, 262)
+        Me.ClientSize = New System.Drawing.Size(760, 262)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.nudStudentCount)
+        Me.Controls.Add(Me.flpWorkSheet)
         Me.Name = "Form1"
         Me.Text = "GradeBook"
+        CType(Me.nudStudentCount, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
+    Friend WithEvents nudStudentCount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents flpWorkSheet As System.Windows.Forms.FlowLayoutPanel
 
 End Class

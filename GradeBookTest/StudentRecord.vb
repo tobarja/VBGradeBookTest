@@ -6,7 +6,7 @@
     Public Sub New(NumGrades)
         Row = New Panel
         Row.BorderStyle = BorderStyle.Fixed3D
-        Row.Size = New Drawing.Size(700, 30)
+        Row.Size = New Drawing.Size(670, 30)
 
         Name = New TextBox
         Name.Location = New Point(5, 5)
