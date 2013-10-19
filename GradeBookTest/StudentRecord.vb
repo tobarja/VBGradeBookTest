@@ -26,6 +26,32 @@
         Row.Controls.Add(txtAverage)
     End Sub
 
+    Public Shared Function getHeader(NumGrades)
+        Dim Header As Panel = New Panel
+        Dim GradeHeader(NumGrades) As Label
+
+        Dim Name As Label = New Label
+        Name.Text = "Name"
+        Name.Location = New Drawing.Size(5, 5)
+
+        With Header
+            .Size = New Drawing.Size(670, 25)
+            .Controls.Add(Name)
+            For x As Integer = 0 To NumGrades - 1
+                GradeHeader(x) = New Label
+                GradeHeader(x).Location = New Point(80 + (40 * (x + 1)), 5)
+                GradeHeader(x).AutoSize = True
+                GradeHeader(x).Text = "G" & (x + 1)
+                .Controls.Add(GradeHeader(x))
+            Next
+            Dim lblAverage As Label = New Label
+            lblAverage.Location = New Point(78 + (40 * (NumGrades + 1)), 5)
+            lblAverage.Text = "Average"
+            .Controls.Add(lblAverage)
+        End With
+        Return Header
+    End Function
+
     Public Sub EditHandler()
         Dim thisGrade As Decimal
         Dim totGrades As Decimal

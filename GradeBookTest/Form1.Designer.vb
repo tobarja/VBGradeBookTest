@@ -25,12 +25,13 @@ Partial Class Form1
         Me.nudStudentCount = New System.Windows.Forms.NumericUpDown()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.flpWorkSheet = New System.Windows.Forms.FlowLayoutPanel()
+        Me.flpHeader = New System.Windows.Forms.FlowLayoutPanel()
         CType(Me.nudStudentCount, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'nudStudentCount
         '
-        Me.nudStudentCount.Location = New System.Drawing.Point(147, 17)
+        Me.nudStudentCount.Location = New System.Drawing.Point(136, 17)
         Me.nudStudentCount.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudStudentCount.Name = "nudStudentCount"
         Me.nudStudentCount.Size = New System.Drawing.Size(63, 20)
@@ -40,7 +41,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(37, 19)
+        Me.Label1.Location = New System.Drawing.Point(26, 19)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(104, 13)
         Me.Label1.TabIndex = 2
@@ -49,17 +50,25 @@ Partial Class Form1
         'flpWorkSheet
         '
         Me.flpWorkSheet.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
-        Me.flpWorkSheet.Location = New System.Drawing.Point(29, 57)
+        Me.flpWorkSheet.Location = New System.Drawing.Point(29, 87)
         Me.flpWorkSheet.Name = "flpWorkSheet"
-        Me.flpWorkSheet.Size = New System.Drawing.Size(700, 150)
+        Me.flpWorkSheet.Size = New System.Drawing.Size(700, 279)
         Me.flpWorkSheet.TabIndex = 0
         Me.flpWorkSheet.WrapContents = False
+        '
+        'flpHeader
+        '
+        Me.flpHeader.Location = New System.Drawing.Point(29, 57)
+        Me.flpHeader.Name = "flpHeader"
+        Me.flpHeader.Size = New System.Drawing.Size(700, 30)
+        Me.flpHeader.TabIndex = 3
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(760, 262)
+        Me.ClientSize = New System.Drawing.Size(760, 386)
+        Me.Controls.Add(Me.flpHeader)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.nudStudentCount)
         Me.Controls.Add(Me.flpWorkSheet)
@@ -73,5 +82,6 @@ Partial Class Form1
     Friend WithEvents nudStudentCount As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents flpWorkSheet As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents flpHeader As System.Windows.Forms.FlowLayoutPanel
 
 End Class
