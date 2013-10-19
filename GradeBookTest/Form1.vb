@@ -1,14 +1,16 @@
 ﻿Public Class Form1
     Dim StudentRecords() As StudentRecord
+    Dim NumberOfGrades As Integer
     Dim Header As Panel
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ReDim StudentRecords(nudStudentCount.Value)
-        Header = StudentRecord.getHeader(nudNumberOfGrades.Value)
+        NumberOfGrades = nudNumberOfGrades.Value
+        Header = StudentRecord.getHeader(NumberOfGrades)
         Me.flpHeader.Controls.Add(Header)
         Me.flpWorkSheet.SuspendLayout()
         For x = 0 To nudStudentCount.Value - 1
-            StudentRecords(x) = New StudentRecord(nudNumberOfGrades.Value)
+            StudentRecords(x) = New StudentRecord(NumberOfGrades)
             Me.flpWorkSheet.Controls.Add(StudentRecords(x).Row)
         Next
         Me.flpWorkSheet.ResumeLayout()
@@ -40,6 +42,16 @@
     End Sub
 
     Private Sub nudNumberOfGrades_ValueChanged(sender As Object, e As EventArgs) Handles nudNumberOfGrades.ValueChanged
+        If IsNothing(nudNumberOfGrades) Then
+            Return
+        End If
+        Dim oldCount As Integer = NumberOfGrades
+        Dim newCount As Integer = nudNumberOfGrades.Value
 
+        If oldCount <> newCount Then
+            Me.flpHeader.Controls.Clear()
+            Me.flpHeader.Controls.Add(StudentRecord.getHeader(newCount))
+            NumberOfGrades = newCount
+        End If
     End Sub
 End Class

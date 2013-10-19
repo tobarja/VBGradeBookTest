@@ -68,4 +68,13 @@
             txtAverage.Text = (totGrades / numGrades).ToString()
         End If
     End Sub
+
+    Sub updateGradeCount(newCount As Integer)
+        If newCount > GradeBlock.GetUpperBound(0) Then
+            MsgBox("Grow!")
+        ElseIf newCount < GradeBlock.GetUpperBound(0) Then
+            MsgBox("Shrink")
+        End If
+    End Sub
+
 End Class
