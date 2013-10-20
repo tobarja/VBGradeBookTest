@@ -1,34 +1,17 @@
 ﻿Public Class StudentRecord
     Dim Name As TextBox
     Dim GradeBlock() As TextBox
+    Dim NumGrades As Integer
     Dim txtAverage As TextBox
     Public Row As Panel
     Public Sub New(NumGrades)
-        Row = New Panel
-        Row.BorderStyle = BorderStyle.Fixed3D
-        Row.Size = New Drawing.Size(670, 30)
-
-        Name = New TextBox
-        Name.Location = New Point(5, 5)
-        Row.Controls.Add(Name)
-
-        Dim lc As Integer
-        ReDim GradeBlock(NumGrades)
-        For lc = 0 To NumGrades - 1
-            GradeBlock(lc) = New TextBox
-            GradeBlock(lc).Size = New Drawing.Size(30, 20)
-            GradeBlock(lc).Location = New Point(75 + (40 * (lc + 1)), 5)
-            AddHandler GradeBlock(lc).TextChanged, AddressOf EditHandler
-            Row.Controls.Add(GradeBlock(lc))
-        Next
-        txtAverage = New TextBox
-        txtAverage.Location = New Point(80 + (40 * (lc + 1)), 5)
-        Row.Controls.Add(txtAverage)
+        Me.NumGrades = NumGrades
+        LayoutGradeRow()
     End Sub
 
     Public Shared Function getHeader(NumGrades)
         Dim Header As Panel = New Panel
-        Dim GradeHeader(NumGrades) As Label
+        Dim GradeHeader(NumGrades - 1) As Label
 
         Dim Name As Label = New Label
         Name.Text = "Name"
@@ -45,14 +28,14 @@
                 .Controls.Add(GradeHeader(x))
             Next
             Dim lblAverage As Label = New Label
-            lblAverage.Location = New Point(78 + (40 * (NumGrades + 1)), 5)
+            lblAverage.Location = New Point(82 + (40 * (NumGrades + 1)), 5)
             lblAverage.Text = "Average"
             .Controls.Add(lblAverage)
         End With
         Return Header
     End Function
 
-    Public Sub EditHandler()
+    Public Sub UpdateAverage()
         Dim thisGrade As Decimal
         Dim totGrades As Decimal
         Dim numGrades As Integer
@@ -70,11 +53,37 @@
     End Sub
 
     Sub updateGradeCount(newCount As Integer)
-        If newCount > GradeBlock.GetUpperBound(0) Then
-            MsgBox("Grow!")
-        ElseIf newCount < GradeBlock.GetUpperBound(0) Then
-            MsgBox("Shrink")
+        Dim oldCount As Integer = GradeBlock.Length
+        If newCount <> oldCount Then
+            NumGrades = newCount
+            LayoutGradeRow()
         End If
+    End Sub
+
+    Private Sub LayoutGradeRow()
+        Row = New Panel
+        Row.BorderStyle = BorderStyle.Fixed3D
+        Row.Size = New Drawing.Size(670, 30)
+
+        Name = New TextBox
+        Name.Location = New Point(5, 5)
+        Row.Controls.Add(Name)
+
+        Dim lc As Integer
+        ReDim Preserve GradeBlock(NumGrades - 1)
+        For lc = 0 To NumGrades - 1
+            If IsNothing(GradeBlock(lc)) Then
+                GradeBlock(lc) = New TextBox
+                GradeBlock(lc).Size = New Drawing.Size(30, 20)
+                GradeBlock(lc).Location = New Point(75 + (40 * (lc + 1)), 5)
+                AddHandler GradeBlock(lc).TextChanged, AddressOf UpdateAverage
+            End If
+            Row.Controls.Add(GradeBlock(lc))
+        Next
+        txtAverage = New TextBox
+        txtAverage.Location = New Point(80 + (40 * (lc + 1)), 5)
+        Row.Controls.Add(txtAverage)
+        UpdateAverage()
     End Sub
 
 End Class

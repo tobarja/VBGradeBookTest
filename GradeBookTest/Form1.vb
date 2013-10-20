@@ -4,16 +4,14 @@
     Dim Header As Panel
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ReDim StudentRecords(nudStudentCount.Value)
+        ReDim StudentRecords(nudStudentCount.Value - 1)
         NumberOfGrades = nudNumberOfGrades.Value
         Header = StudentRecord.getHeader(NumberOfGrades)
         Me.flpHeader.Controls.Add(Header)
-        Me.flpWorkSheet.SuspendLayout()
         For x = 0 To nudStudentCount.Value - 1
             StudentRecords(x) = New StudentRecord(NumberOfGrades)
-            Me.flpWorkSheet.Controls.Add(StudentRecords(x).Row)
         Next
-        Me.flpWorkSheet.ResumeLayout()
+        ReDrawRecordsPanel()
         Me.flpWorkSheet.AutoScroll = True
         Me.flpWorkSheet.PerformLayout()
     End Sub
@@ -22,27 +20,22 @@
         If IsNothing(nudStudentCount) Or IsNothing(StudentRecords) Then
             Return
         End If
-        Me.flpWorkSheet.SuspendLayout()
         Dim newCount As Integer = nudStudentCount.Value
-        Dim oldCount As Integer = StudentRecords.GetUpperBound(0)
+        Dim oldCount As Integer = StudentRecords.Length
         If newCount > oldCount Then
-            ReDim Preserve StudentRecords(newCount)
+            ReDim Preserve StudentRecords(newCount - 1)
             For x = oldCount To newCount - 1
-                StudentRecords(x) = New StudentRecord(5)
-                Me.flpWorkSheet.Controls.Add(StudentRecords(x).Row)
+                StudentRecords(x) = New StudentRecord(NumberOfGrades)
             Next
         ElseIf newCount < oldCount Then
-            For x = oldCount - 1 To newCount Step -1
-                Me.flpWorkSheet.Controls.RemoveAt(x)
-            Next
-            ReDim Preserve StudentRecords(newCount)
+            ReDim Preserve StudentRecords(newCount - 1)
         End If
-        Me.flpWorkSheet.ResumeLayout()
+        ReDrawRecordsPanel()
 
     End Sub
 
     Private Sub nudNumberOfGrades_ValueChanged(sender As Object, e As EventArgs) Handles nudNumberOfGrades.ValueChanged
-        If IsNothing(nudNumberOfGrades) Then
+        If IsNothing(nudNumberOfGrades) Or IsNothing(StudentRecords) Then
             Return
         End If
         Dim oldCount As Integer = NumberOfGrades
@@ -52,6 +45,23 @@
             Me.flpHeader.Controls.Clear()
             Me.flpHeader.Controls.Add(StudentRecord.getHeader(newCount))
             NumberOfGrades = newCount
+            For Each record As StudentRecord In StudentRecords
+                record.updateGradeCount(newCount)
+            Next
+            ReDrawRecordsPanel()
         End If
+    End Sub
+
+    Private Sub ReDrawRecordsPanel()
+        Me.flpWorkSheet.SuspendLayout()
+        Me.flpWorkSheet.Controls.Clear()
+        For Each record As StudentRecord In StudentRecords
+            Me.flpWorkSheet.Controls.Add(record.Row)
+        Next
+        Me.flpWorkSheet.ResumeLayout()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
+        ReDrawRecordsPanel()
     End Sub
 End Class
